@@ -2,9 +2,6 @@
     text-align: center;
 }
 
-.custom-me {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 80vh;
+body {
+    background-color: #e63946;
 }

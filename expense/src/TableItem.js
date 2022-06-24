@@ -2,10 +2,10 @@ import Table from "react-bootstrap/Table";
 
 const TableItem = ({ ALLITEM }) => {
   return (
-    <Table striped bordered hover>
+    <Table striped bordered hover className="mt-5 table-dark">
       <thead>
         <tr>
-          <th>#</th>
+          <th>No</th>
           <th>Name</th>
           <th>Date</th>
           <th>Amount</th>
@@ -15,7 +15,7 @@ const TableItem = ({ ALLITEM }) => {
         {ALLITEM.map((item, i) => {
           return (
             <tr>
-              <td>{i}</td>
+              <td>{i + 1}</td>
               <td>{item.name}</td>
               <td>{item.date}</td>
               <td>Rp. {item.amount}</td>

@@ -20,6 +20,7 @@ const FormFill = ({
             setName(e.target.value);
           }}
           value={name}
+          required
         />
       </Form.Group>
 
@@ -31,6 +32,7 @@ const FormFill = ({
             setDate(e.target.value);
           }}
           value={date}
+          required
         />
       </Form.Group>
       <Form.Group className="mb-3" controlId="formAmount">
@@ -41,6 +43,7 @@ const FormFill = ({
             setAmount(e.target.value);
           }}
           value={amount}
+          required
         />
       </Form.Group>
       <Button variant="primary" type="submit" className="w-100">

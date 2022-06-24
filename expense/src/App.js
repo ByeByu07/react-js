@@ -27,21 +27,25 @@ function App() {
       date,
       amount,
     };
-    Swal.fire(
-      `${name} have been added to your list!!`,
-      "success",
-      "success"
-    ).then(() => {
-      ALLITEM.push(data);
-    });
-    setItem(data);
-    setName("");
-    setDate("");
-    setAmount("");
+
+    new Promise((resolve, reject) => resolve(ALLITEM.push(data)))
+      .then(() => {
+        Swal.fire(
+          `${name} have been added to your list!!`,
+          "success",
+          "success"
+        );
+      })
+      .finally(() => {
+        setItem(data);
+        setName("");
+        setDate("");
+        setAmount("");
+      });
   };
 
   return (
-    <div className="container mt-5 custom-me">
+    <div className="container mt-5">
       <Header />
       <FormFill
         objItem={objItem}
