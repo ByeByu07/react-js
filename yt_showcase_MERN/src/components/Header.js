@@ -1,7 +1,7 @@
-import { Form, Button, Row, Col, Container } from "react-bootstrap";
+import { Row, Col, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Logo from "./navbar/Logo";
+// import Logo from "./navbar/Logo";
 import Search from "./navbar/Search";
 
 export default function Header() {

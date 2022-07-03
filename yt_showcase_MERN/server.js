@@ -8,7 +8,6 @@ const port = 5000;
 const { Schema } = mongoose;
 //nake schema mongoose
 
-
 app.use(express.json());
 //listen express
 app.listen(port, () => {
@@ -20,7 +19,7 @@ app.get("/", (req, res) => {
   res.send("halo");
 });
 
-app.get("/signin",(req,res)=>{
+app.post("/signin", (req, res) => {
   // res.send("p")
-console.log("signinpage");
-})
+  console.log("halo");
+});
