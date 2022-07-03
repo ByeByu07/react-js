@@ -1,0 +1,13 @@
+.search {
+    display: inline;
+    /* flex-wrap: wrap; */
+    flex-flow: row wrap;
+}
+
+.search input {
+    flex-basis: 75%;
+}
+
+.search button {
+    flex-basis: 25%;
+}
