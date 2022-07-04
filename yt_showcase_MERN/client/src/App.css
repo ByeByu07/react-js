@@ -1,0 +1,42 @@
+/* body {
+    background-image: linear-gradient(90deg, rgb(58, 58, 58), rgb(14, 12, 12));
+} */
+
+.imageSection {
+    height: 100vh;
+    width: 40vw;
+}
+
+.absoluteTitle {
+    position: absolute;
+    color: black;
+    top: 20%;
+    right: 20%;
+}
+
+.container-category-me {
+    scroll-snap-type: y mandatory;
+    overflow-y: auto;
+    height: 100vh;
+}
+
+.container-category-me section {
+    height: 100vh;
+    /* display: flex; */
+    align-items: center;
+    color: white;
+    scroll-snap-align: start;
+    position: relative;
+}
+
+.sign_in_container,.sign_up_container {
+    height: 100vh;
+    background-color: #bde0fe;
+}
+
+.sign_in_card,.sign_up_card {
+    padding: 4rem 7rem;
+    margin: 0 15rem;
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
