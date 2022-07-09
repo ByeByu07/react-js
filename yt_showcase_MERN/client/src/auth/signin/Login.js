@@ -10,7 +10,7 @@ export default function Login() {
   const navigate = useNavigate()
 
   const post = (e) => {
-    // axios.post("http://localhost:5000/signin", { email, password });
+    axios.post("signin", { email, password });
     e.preventDefault();
     console.log({ email, password });
   };
