@@ -10,9 +10,8 @@ export default function Login() {
   const navigate = useNavigate()
 
   const post = (e) => {
-    axios.post("signin", { email, password });
     e.preventDefault();
-    console.log({ email, password });
+    axios.post("/signin", { email, password });
   };
 
   return (
@@ -20,7 +19,7 @@ export default function Login() {
       <div className="sign_in_container d-flex justify-content-center align-items-center">
         <div className="card sign_in_card">
           <Form onSubmit={post}>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Group className="mb-3" controlId="email">
               <Form.Label>Email</Form.Label>
               <Form.Control
                 type="text"
@@ -29,7 +28,7 @@ export default function Login() {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Group className="mb-3" controlId="password">
               <Form.Label>Password</Form.Label>
               <Form.Control
                 type="password"

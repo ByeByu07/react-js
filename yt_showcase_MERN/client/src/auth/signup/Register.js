@@ -2,6 +2,7 @@ import {Form,Button} from "react-bootstrap"
 import { useNavigate } from "react-router"
 import axios from "axios"
 import { useReducer } from "react"
+import Swal from "sweetalert2"
 
 const ACTION = {
     EMAIL:"EMAIL",PASSWORD:"PASSWORD",PASSWORD_C:"PASSWORD_C"
@@ -29,8 +30,27 @@ export default function Register(){
     const [state,dispatch] = useReducer(reducer,initValue)
 
     const post = (e) => {
-        axios.post("signup",state)
         e.preventDefault();
+        if(state.password !== state.password_c){
+            return Swal.fire('Gagal Mendaftar','Pastikan Password Sama','error')
+        }
+
+        try{
+            axios.post("/signup",state)
+        }catch(err){
+            return console.log(err)
+        }
+        
+        return Swal.fire({
+            title:'Berhasil Daftar',
+            showCloseButton:true,
+            confirmButtonText:'Login?',
+            icon:'success'
+        }).then((result)=>{
+            if(result.isConfirmed){
+                navigate('/signin')
+            }
+        });
     }
 
     const funcDispatch = (type,e) => {

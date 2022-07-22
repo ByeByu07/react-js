@@ -1,29 +1,45 @@
+// .env config
+require('dotenv').config()
+
 const { urlencoded } = require("express");
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors")
 const bcrypt = require("bcrypt")
+const plainText = process.env.PLAIN_TEXT_HASH
 
-//bcrypt configuration
-
+//router express
+const dashboard = require('./dashboard')
 
 //init express and port
 const app = express();
 const port = 3001;
 
 //init mongoose
-const connection = mongoose.createConnection("mongodb://localhost:27017/user")
+const connection = mongoose.createConnection("mongodb://127.0.0.1:27017/user")
 const { Schema } = mongoose;
 
 //make schema mongoose
 const schema = new Schema({
-  email:String,
-  password:String,
-  created_at:{type:Date, default: Date()}
+  email:{
+    type:String,
+    min:3
+  },
+  password:{
+    type:String,
+    min:3
+  },
+  created_at:{
+    type:Date, 
+    default: Date()
+  }
 })
 
 //make model User from schema
 const User = connection.model("User",schema)
+
+//router dashboard
+app.use('/dashboard',dashboard)
 
 //middleware
 app.use(express.json());
@@ -44,41 +60,33 @@ app.get("/", (req, res) => {
 app.post("/signup",async(req,res)=>{
 
   //collect data from req
-  let {email,password,password_c} = {
-    email:req.body.email,
-    password:req.body.password,
-    password_c:req.body.password_c
+  const email=req.body.email
+  const password=req.body.password
+  const password_c=req.body.password_c
+  
+  try{
+    await bcrypt.hash(plainText,10,(err,hash)=>{
+      console.log(hash)
+      return User.create({email,password:hash})
+    })
+  }catch(err){
+    console.log(err)
   }
 
-  //compare pass & pass_c
-  if(password === password_c){
-    return res.send("not same")
-  }
-
-  //check in database for email
-  //true : email must unique
-  //false : add user to colletion
-  if(User.find({email:email})){
-    return console.log("sudah ada")
-  }else{
-  //encription password w bcrypt
-    password = async () => {
-      return await bcrypt.genSalt().then((salt,err)=>salt)
-    }
-    User.create({email:email,password:password}).then((p)=>console.log(`save user with email :${p.email}`))
-  }
-
-
-
-  // bcrypt.genSalt().then((salt)=>bcrypt.hash(salt,(err,salt)=>{
-  //   console.log(salt)
-  // }))
-
-  console.log(req.body)
 })
 
 //AUTHENTICATION LOGIN - SIGNIN
 app.post("/signin", (req, res) => {
-  // res.send("p")
-  console.log(req.body);
+  const email = req.body.email
+  const password = req.body.password
+
+  User.findOne({email},async(err,user)=>{
+
+    const compare = await bcrypt.compare(password,user.password)
+
+    console.log(compare,password,user.password)
+
+    return res.redirect(301,'/')
+  })
+
 });
